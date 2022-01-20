@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Runtime.InteropServices;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+  public Text textAccountId;
+
   [DllImport("__Internal")]
   private static extern void NearLogin ();
 
@@ -11,6 +14,7 @@ public class GameController : MonoBehaviour
 
   [DllImport("__Internal")]
   private static extern void FtBalanceOf (string accountId);
+
 
   public void NearLoginPub () {
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
@@ -28,5 +32,9 @@ public class GameController : MonoBehaviour
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
     FtBalanceOf(accountId);
 #endif
+  }
+
+  public void setAccountId (string accountId) {
+    textAccountId.text = accountId;
   }
 }
